@@ -13,8 +13,7 @@
   "categories": [
     "AI",
     "AUTOMATION",
-    "DEVELOPER_TOOLS",
-    "DATA_EXTRACTION"
+    "DEVELOPER_TOOLS"
   ],
   "storages": {
     "dataset": {
@@ -23,38 +22,35 @@
       "description": "Clean markdown content extracted from URLs",
       "views": {
         "content": {
-          "title": "Content View",
+          "title": "All Results",
           "transformation": {
             "fields": [
               "url",
               "title",
               "content",
-              "metadata"
+              "metadata",
+              "status"
             ]
           }
         },
-        "successful": {
-          "title": "Successful Only",
+        "markdown": {
+          "title": "Markdown Only",
           "transformation": {
             "fields": [
               "url",
               "title",
               "content"
-            ],
-            "unwind": "status",
-            "filter": "status == 'success'"
+            ]
           }
         },
-        "failed": {
-          "title": "Failed URLs",
+        "stats": {
+          "title": "Statistics",
           "transformation": {
             "fields": [
               "url",
-              "error",
+              "status",
               "metadata"
-            ],
-            "unwind": "status",
-            "filter": "status == 'error'"
+            ]
           }
         }
       }
