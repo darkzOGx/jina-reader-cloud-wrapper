@@ -1,0 +1,109 @@
+{
+  "title": "Jina Reader Cloud Wrapper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "URLs to Process",
+      "type": "array",
+      "description": "List of URLs to convert to LLM-ready format",
+      "editor": "stringList",
+      "items": {
+        "type": "string",
+        "pattern": "^https?://"
+      },
+      "minItems": 1,
+      "example": [
+        "https://en.wikipedia.org/wiki/Artificial_intelligence",
+        "https://docs.python.org/3/tutorial/index.html"
+      ]
+    },
+    "returnFormat": {
+      "title": "Output Format",
+      "type": "string",
+      "description": "Format for the extracted content",
+      "enum": ["markdown", "json", "html", "text", "screenshot"],
+      "default": "markdown",
+      "editor": "select"
+    },
+    "useReaderLM": {
+      "title": "Use ReaderLM-v2 (Higher Quality)",
+      "type": "boolean",
+      "description": "Use advanced ReaderLM-v2 model for better quality. WARNING: Consumes 3x tokens. Best for complex pages with tables, code, nested lists.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "generateImageAlt": {
+      "title": "Generate Image Alt Text",
+      "type": "boolean",
+      "description": "Automatically generate descriptive alt text for images using vision models",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "timeout": {
+      "title": "Page Load Timeout (ms)",
+      "type": "integer",
+      "description": "Maximum time to wait for page rendering. Higher values capture more dynamic content.",
+      "default": 30000,
+      "minimum": 5000,
+      "maximum": 120000,
+      "unit": "milliseconds"
+    },
+    "noCache": {
+      "title": "Disable Caching",
+      "type": "boolean",
+      "description": "Force fresh content fetching, bypassing Jina's cache. Use for real-time monitoring.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "cacheTolerance": {
+      "title": "Cache Tolerance (seconds)",
+      "type": "integer",
+      "description": "Maximum age of cached content (in seconds). Leave empty to use Jina's default (3600s).",
+      "minimum": 0,
+      "maximum": 86400,
+      "unit": "seconds"
+    },
+    "targetSelector": {
+      "title": "Target CSS Selector",
+      "type": "string",
+      "description": "Limit extraction to specific element (e.g., 'article.post-content', '#main-content')",
+      "editor": "textfield",
+      "prefill": "",
+      "example": "article.main-content"
+    },
+    "waitForSelector": {
+      "title": "Wait For Selector",
+      "type": "string",
+      "description": "CSS selector to wait for before extracting content (for dynamically loaded content)",
+      "editor": "textfield",
+      "prefill": "",
+      "example": ".article-loaded"
+    },
+    "jinaApiKey": {
+      "title": "Jina API Key (Optional)",
+      "type": "string",
+      "description": "Your Jina API key for higher rate limits (500 RPM vs 20 RPM). Get free key at jina.ai",
+      "editor": "textfield",
+      "isSecret": true,
+      "prefill": ""
+    },
+    "batchSize": {
+      "title": "Batch Size",
+      "type": "integer",
+      "description": "Number of URLs to process concurrently. Lower values reduce rate limit issues.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "maxRetries": {
+      "title": "Max Retries Per URL",
+      "type": "integer",
+      "description": "Number of retry attempts for failed URLs",
+      "default": 3,
+      "minimum": 0,
+      "maximum": 10
+    }
+  },
+  "required": ["urls"]
+}

@@ -1,0 +1,63 @@
+{
+  "actorSpecification": 1,
+  "name": "jina-reader-cloud-wrapper",
+  "title": "Jina Reader Cloud - URL to LLM-Ready Markdown",
+  "description": "Convert any URL to clean, LLM-ready markdown instantly. Perfect for RAG pipelines, AI agents, and content extraction. Powered by Jina AI Reader with automatic retries, batch processing, and cost tracking.",
+  "version": "1.0.0",
+  "meta": {
+    "templateId": "jina-reader-cloud-wrapper"
+  },
+  "input": "./INPUT_SCHEMA.json",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "categories": [
+    "AI",
+    "AUTOMATION",
+    "DEVELOPER_TOOLS",
+    "DATA_EXTRACTION"
+  ],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "Converted Content",
+      "description": "Clean markdown content extracted from URLs",
+      "views": {
+        "content": {
+          "title": "Content View",
+          "transformation": {
+            "fields": [
+              "url",
+              "title",
+              "content",
+              "metadata"
+            ]
+          }
+        },
+        "successful": {
+          "title": "Successful Only",
+          "transformation": {
+            "fields": [
+              "url",
+              "title",
+              "content"
+            ],
+            "unwind": "status",
+            "filter": "status == 'success'"
+          }
+        },
+        "failed": {
+          "title": "Failed URLs",
+          "transformation": {
+            "fields": [
+              "url",
+              "error",
+              "metadata"
+            ],
+            "unwind": "status",
+            "filter": "status == 'error'"
+          }
+        }
+      }
+    }
+  }
+}

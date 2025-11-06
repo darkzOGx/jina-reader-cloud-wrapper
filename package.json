@@ -1,0 +1,35 @@
+{
+  "name": "jina-reader-cloud-wrapper",
+  "version": "1.0.0",
+  "description": "Cloud wrapper for Jina AI Reader - Convert any URL to clean, LLM-ready markdown for RAG pipelines, AI agents, and content extraction",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "jina",
+    "reader",
+    "llm",
+    "markdown",
+    "content-extraction",
+    "web-scraping",
+    "ai",
+    "rag",
+    "apify"
+  ],
+  "author": "DarkzOGx",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apify": "^3.1.0",
+    "got-scraping": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkzogx/jina-reader-cloud-wrapper"
+  }
+}
